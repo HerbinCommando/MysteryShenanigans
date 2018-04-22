@@ -1,0 +1,72 @@
+{
+  "MysteryTourDescription": "A mystery tour jam packed with lots of various shennanagens",
+  "Shennanagens": [
+    {
+      "ShennanagenDescription": "first shennanagen description",
+      "ShennanagenName": "first shennanagen name",
+      "Activities": [
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 50,
+          "ActivityDescription": "activity 1 description",
+          "ActivityName": "activity 1 name"
+        },
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 25,
+          "ActivityDescription": "activity 2 description",
+          "ActivityName": "activity 2 name"
+        },
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 10,
+          "ActivityDescription": "activity 3 description",
+          "ActivityName": "activity 3 name"
+        }
+      ]
+    },
+    {
+      "ShennanagenDescription": "second shennanagen description",
+      "ShennanagenName": "second shennanagen name",
+      "Activities": [
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 100,
+          "ActivityDescription": "single activity description",
+          "ActivityName": "single activity name"
+        }
+      ]
+    },
+    {
+      "ShennanagenDescription": "third shennanagen description",
+      "ShennanagenName": "third shennanagen name",
+      "Activities": [
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 50,
+          "ActivityDescription": "activity 5 description",
+          "ActivityName": "activity 5 name"
+        },
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 25,
+          "ActivityDescription": "activity 6 description",
+          "ActivityName": "activity 6 name"
+        },
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 10,
+          "ActivityDescription": "activity 7 description",
+          "ActivityName": "activity 7 name"
+        },
+        {
+          "TimesActivityCanBeCompleted": 1,
+          "PointsPerCompletion": 5,
+          "ActivityDescription": "activity 8 description",
+          "ActivityName": "activity 8 name"
+        }
+      ]
+    }
+  ],
+  "mysteryTourName": "mystery tour name"
+}

@@ -1,0 +1,32 @@
+{
+  "ThirstLevels":[
+    {
+      "level":0,
+      "description":"Quenched",
+      "EntertainmentModifier":1
+    },{
+      "level":1,
+      "description":"Not UN-thirsty",
+      "EntertainmentModifier":0
+    },{
+      "level":2,
+      "description":"Thirsty",
+      "EntertainmentModifier":-1
+    },{
+      "level":4,
+      "description":"Parched",
+      "EntertainmentModifier":-1
+    },{
+      "level":6,
+      "description":"Dehydrated",
+      "EntertainmentModifier":-3
+    },{
+      "level":12,
+      "description":"Very Dehydrated",
+      "EntertainmentModifier":-10
+    },{
+      "level":20,
+      "description":"Near-Death",
+      "EntertainmentModifier":-10
+    }]
+}
