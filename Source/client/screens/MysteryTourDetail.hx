@@ -23,11 +23,16 @@ import objects.Shennanagen;
 class MysteryTourDetail extends Sprite {
 
     public var screenBg:Bitmap;
+    public var mysteryTour:MysteryTour;
     public var mysteryTourNameBg:Sprite;
     public var mysteryTourName:TextField;
     public var mysteryTourDescBg:Sprite;
     public var mysteryTourDesc:TextField;
     public var shennanagenButtonContainer:Sprite;
+    public var shennanyNameBg:Sprite;
+    public var shennanyName:TextField;
+    public var shennanyDescBg:Sprite;
+    public var shennanyDesc:TextField;
     public var shennanagens:Array<TextButton>;
     public var maxButtonYPos:Int = 185;
     public var shennanagenDetailScreen:ShennanagenDetail;
@@ -44,7 +49,7 @@ class MysteryTourDetail extends Sprite {
         mysteryTourNameBg.graphics.drawRect(0, 0, 600, 80);
         mysteryTourNameBg.graphics.endFill();
         addChild(mysteryTourNameBg);
-        mysteryTourNameBg.x = (1080-600)/2;
+        mysteryTourNameBg.x = (Lib.current.stage.stageWidth-600)/2;
         mysteryTourNameBg.y = 15;
 
         mysteryTourName = new TextField();
@@ -55,14 +60,13 @@ class MysteryTourDetail extends Sprite {
         mysteryTourName.autoSize = TextFieldAutoSize.CENTER;
         mysteryTourNameBg.addChild(mysteryTourName);
 
-        // TODO: If the Shennanegan and the Activity list are size one, simplify the UI
         mysteryTourDescBg = new Sprite();
         mysteryTourDescBg.graphics.beginFill(0x000000);
-        mysteryTourDescBg.graphics.drawRect(0, 0, 775, 200);
+        mysteryTourDescBg.graphics.drawRect(0, 0, 600, 200);
         mysteryTourDescBg.graphics.endFill();
         addChild(mysteryTourDescBg);
-        mysteryTourDescBg.x = (1080-775)/2;
-        mysteryTourDescBg.y = 150;
+        mysteryTourDescBg.x = (Lib.current.stage.stageWidth-600)/2;
+        mysteryTourDescBg.y = 110;
 
         mysteryTourDesc = new TextField();
         mysteryTourDesc.setTextFormat(TextFormats.SIZE_24);
@@ -72,33 +76,100 @@ class MysteryTourDetail extends Sprite {
         mysteryTourDesc.autoSize = TextFieldAutoSize.CENTER;
         mysteryTourDescBg.addChild(mysteryTourDesc);
 
+        this.mysteryTour = mysteryTour;
+        if (mysteryTour.shennanagens == null || mysteryTour.shennanagens.length == 0) {
+            //dont crash
+        }
+        else if (mysteryTour.shennanagens.length == 1) {
+            layoutShennanagen();
+        }
+        else {
+            layoutShennanagens();
+        }
+        
+    }
+
+    private function layoutShennanagen():Void {
+
+        var shennany:Shennanagen = mysteryTour.shennanagens[0];
+
+        shennanyNameBg = new Sprite();
+        shennanyNameBg.graphics.beginFill(0x000000);
+        shennanyNameBg.graphics.drawRect(0, 0, 700, 80);
+        shennanyNameBg.graphics.endFill();
+        addChild(shennanyNameBg);
+        shennanyNameBg.x = (Lib.current.stage.stageWidth-700)/2;
+        shennanyNameBg.y = 315;
+
+        shennanyName = new TextField();
+        shennanyName.setTextFormat(TextFormats.SIZE_32);
+        shennanyName.text = shennany.name;
+        shennanyName.width = 700;
+        shennanyName.height = 80;
+        shennanyName.autoSize = TextFieldAutoSize.CENTER;
+        shennanyNameBg.addChild(shennanyName);
+
+        shennanyDescBg = new Sprite();
+        shennanyDescBg.graphics.beginFill(0x000000);
+        shennanyDescBg.graphics.drawRect(0, 0, 700, 200);
+        shennanyDescBg.graphics.endFill();
+        addChild(shennanyDescBg);
+        shennanyDescBg.x = (Lib.current.stage.stageWidth-700)/2;
+        shennanyDescBg.y = 415;
+
+        shennanyDesc = new TextField();
+        shennanyDesc.setTextFormat(TextFormats.SIZE_24);
+        shennanyDesc.text = shennany.desc;
+        shennanyDesc.width = 700;
+        shennanyDesc.height = 200;
+        shennanyDesc.autoSize = TextFieldAutoSize.CENTER;
+        shennanyDescBg.addChild(shennanyDesc);
+
+        // TODO: Add a complete shennany button
+        shennanyNameBg.addEventListener(MouseEvent.CLICK, onClickShennanagen);
+        shennanyDescBg.addEventListener(MouseEvent.CLICK, onClickShennanagen);
+    }
+
+    private function layoutShennanagens():Void {
+
         shennanagenButtonContainer = new Sprite();
         addChild(shennanagenButtonContainer);
         shennanagenButtonContainer.y = 385;
 
         shennanagens = new Array<TextButton>();
-        for (shennanagen in mysteryTour.shennanagens) {
+        for (shenanny in mysteryTour.shennanagens) {
 
-            trace(shennanagen);
-            var btn:TextButton = new TextButton(shennanagen.name, 500, 40);
+            var btn:TextButton = new TextButton(shenanny.name, 500, 40);
             btn.addEventListener(MouseEvent.CLICK, onClickShennanagen);
-            btn.cargo = shennanagen;
+            btn.cargo = shenanny;
             shennanagenButtonContainer.addChild(btn);
             btn.x = 20;
             btn.y = shennanagens.length * 55;
             shennanagens.push(btn);
 
+            var pointsText:String = shenanny.pointsEarned + " pts. / " + shenanny.pointsPossible + " pts." + (shenanny.canBeCompletedMoreThanOnce ? " each" : "");
+            var pointsBtn:TextButton = new TextButton(pointsText, 250, 40);
+            pointsBtn.addEventListener(MouseEvent.CLICK, onClickShennanagen);
+            pointsBtn.cargo = shenanny;
+            pointsBtn.x = Lib.current.stage.stageWidth - 265;
+            pointsBtn.y = btn.y;
+            shennanagenButtonContainer.addChild(pointsBtn);
+
         }
 
         this.addEventListener(MouseEvent.MOUSE_WHEEL, onScrollMouseWheel);
-        
     }
 
     public function onClickShennanagen(e:MouseEvent):Void {
 
-        var btn:TextButton = cast(e.currentTarget, TextButton);
-        shennanagenDetailScreen = new ShennanagenDetail(cast(btn.cargo, Shennanagen));
-        addChild(shennanagenDetailScreen);
+        if (mysteryTour.shennanagens.length == 1) {
+            shennanagenDetailScreen = new ShennanagenDetail(mysteryTour.shennanagens[0]);
+            addChild(shennanagenDetailScreen);
+        } else if (mysteryTour.shennanagens.length > 1) {
+            var btn:TextButton = cast(e.currentTarget, TextButton);
+            shennanagenDetailScreen = new ShennanagenDetail(cast(btn.cargo, Shennanagen));
+            addChild(shennanagenDetailScreen);
+        }
 
     }
 

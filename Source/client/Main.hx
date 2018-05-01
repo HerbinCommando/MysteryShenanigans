@@ -36,8 +36,8 @@ class Main extends Sprite {
 
         mysteryTours = new Array<MysteryTour>();
 
-        // TODO: Load available shennanagens from the server. Probably auto log in to the current shennanagen.
-        loadTestShennanagens();
+        // TODO: Load available Mystery Tour activities from the server. Probably auto log in to the current Mystery Tour.
+        loadTestMysteryTours();
 
         stageBg = new Sprite();
         stageBg.graphics.beginFill(0x000000);
@@ -51,27 +51,19 @@ class Main extends Sprite {
 
 	}
 
-    public function loadTestShennanagens():Void {
-        /*
+    public function loadTestMysteryTours():Void {
         var data = Assets.loadText("assets/data/TheSimpleTestMysteryTour.json");
         data.onComplete(function (jsonData:String) {
-            trace(jsonData);
             var tour:MysteryTour = new MysteryTour(jsonData);
             mysteryTours.push(tour);
-            //var jsonObj:Dynamic = Json.parse(jsonData);
-            //trace(jsonObj);
-            //shennanagenActivities = jsonObj;
         });
-        */
+        /*
         var data = Assets.loadText("assets/data/TheJamPackedTestMysteryTour.json");
         data.onComplete(function (jsonData:String) {
-            trace(jsonData);
             var tour:MysteryTour = new MysteryTour(jsonData);
             mysteryTours.push(tour);
-            //var jsonObj:Dynamic = Json.parse(jsonData);
-            //trace(jsonObj);
-            //shennanagenActivities = jsonObj;
         });
+        */
     }
 
     public function onTeamLoginComplete():Void {

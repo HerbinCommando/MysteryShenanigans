@@ -1,18 +1,13 @@
 {
+  "MysteryTourName": "The Simple Test Mystery Tour",
   "MysteryTourDescription": "A simple mystery tour, showcasing a simple shennanagan, for the simple man.",
   "Shennanagens": [
     {
-      "ShennanagenDescription": "A simple shennanagen with one activity",
-      "ShennanagenName": "Simple Test Shennanagen",
-      "Activities": [
-        {
-          "TimesActivityCanBeCompleted": 1,
-          "PointsPerCompletion": 50,
-          "ActivityDescription": "Just a nice, simple activity",
-          "ActivityName": "Simple Test Activity"
-        }
-      ]
+      "ShennanagenName": "Do Nothing",
+      "ShennanagenDescription": "A simple shennanagen with one thing to do, nothing",
+      "TimesToBeCompleted": 1,
+      "PointsPerCompletion": 50,
+      "Shennanagens": []
     }
-  ],
-  "MysteryTourName": "The Simple Test Mystery Tour"
+  ]
 }

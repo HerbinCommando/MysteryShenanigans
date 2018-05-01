@@ -1041,7 +1041,7 @@ $hxClasses["ApplicationMain"] = ApplicationMain;
 ApplicationMain.__name__ = ["ApplicationMain"];
 ApplicationMain.main = function() {
 	var projectName = "MysteryShennanagens";
-	var config = { build : "50", company : "Company Name", file : "MysteryShennanagens", fps : 60, name : "MysteryShennanagens", orientation : "", packageName : "com.mysterytours.MysteryShennanagens", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, colorDepth : 16, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : false, maximized : false, minimized : false, parameters : { }, resizable : true, stencilBuffer : true, title : "MysteryShennanagens", vsync : false, width : 0, x : null, y : null}]};
+	var config = { build : "1", company : "Company Name", file : "MysteryShennanagens", fps : 60, name : "MysteryShennanagens", orientation : "", packageName : "com.mysterytours.MysteryShennanagens", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, colorDepth : 16, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : false, maximized : false, minimized : false, parameters : { }, resizable : true, stencilBuffer : true, title : "MysteryShennanagens", vsync : false, width : 0, x : null, y : null}]};
 	lime_system_System.__registerEntryPoint(projectName,ApplicationMain.create,config);
 };
 ApplicationMain.create = function(config) {
@@ -3849,7 +3849,7 @@ var client_Main = function() {
 	openfl_display_Sprite.call(this);
 	haxe_Log.trace("running",{ fileName : "Main.hx", lineNumber : 35, className : "client.Main", methodName : "new"});
 	this.mysteryTours = [];
-	this.loadTestShennanagens();
+	this.loadTestMysteryTours();
 	this.stageBg = new openfl_display_Sprite();
 	this.stageBg.get_graphics().beginFill(0);
 	this.stageBg.get_graphics().drawRect(0,0,openfl_Lib.get_current().stage.stageWidth,openfl_Lib.get_current().stage.stageHeight);
@@ -3868,11 +3868,10 @@ client_Main.prototype = $extend(openfl_display_Sprite.prototype,{
 	,mysteryTourDetailScreen: null
 	,mysteryTours: null
 	,currentMysteryTour: null
-	,loadTestShennanagens: function() {
+	,loadTestMysteryTours: function() {
 		var _gthis = this;
-		var data = openfl_utils_Assets.loadText("assets/data/TheJamPackedTestMysteryTour.json");
+		var data = openfl_utils_Assets.loadText("assets/data/TheSimpleTestMysteryTour.json");
 		data.onComplete(function(jsonData) {
-			haxe_Log.trace(jsonData,{ fileName : "Main.hx", lineNumber : 68, className : "client.Main", methodName : "loadTestShennanagens"});
 			var tour = new objects_MysteryTour(jsonData);
 			_gthis.mysteryTours.push(tour);
 		});
@@ -4107,7 +4106,7 @@ ManifestResources.init = function(config) {
 	var data;
 	var manifest;
 	var library;
-	data = "{\"name\":null,\"assets\":\"aoy4:pathy44:assets%2Fimages%2FBuy%20Lame%20Souvenirs.pngy4:sizei68641y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y27:assets%2Ffont%2FVT323.woff2R2i7020R3y6:BINARYR5R7R6tgoR2i153116R3y4:FONTy9:classNamey38:__ASSET__assets_font_vt323_regular_ttfR5y33:assets%2Ffont%2FVT323-Regular.ttfR6tgoR0y48:assets%2Fdata%2FTheJamPackedTestMysteryTour.jsonR2i2285R3y4:TEXTR5R13R6tgoR0y45:assets%2Fdata%2FTheSimpleTestMysteryTour.jsonR2i570R3R14R5R15R6tgh\",\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	data = "{\"name\":null,\"assets\":\"aoy4:pathy44:assets%2Fimages%2FBuy%20Lame%20Souvenirs.pngy4:sizei68641y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y27:assets%2Ffont%2FVT323.woff2R2i7020R3y6:BINARYR5R7R6tgoR2i153116R3y4:FONTy9:classNamey38:__ASSET__assets_font_vt323_regular_ttfR5y33:assets%2Ffont%2FVT323-Regular.ttfR6tgoR0y45:assets%2Fdata%2FTheSimpleTestMysteryTour.jsonR2i413R3y4:TEXTR5R13R6tgh\",\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -4748,7 +4747,7 @@ var client_screens_MysteryTourDetail = function(mysteryTour) {
 	this.mysteryTourNameBg.get_graphics().drawRect(0,0,600,80);
 	this.mysteryTourNameBg.get_graphics().endFill();
 	this.addChild(this.mysteryTourNameBg);
-	this.mysteryTourNameBg.set_x(240.);
+	this.mysteryTourNameBg.set_x((openfl_Lib.get_current().stage.stageWidth - 600) / 2);
 	this.mysteryTourNameBg.set_y(15);
 	this.mysteryTourName = new openfl_text_TextField();
 	this.mysteryTourName.setTextFormat(client_utils_TextFormats.SIZE_46);
@@ -4759,11 +4758,11 @@ var client_screens_MysteryTourDetail = function(mysteryTour) {
 	this.mysteryTourNameBg.addChild(this.mysteryTourName);
 	this.mysteryTourDescBg = new openfl_display_Sprite();
 	this.mysteryTourDescBg.get_graphics().beginFill(0);
-	this.mysteryTourDescBg.get_graphics().drawRect(0,0,775,200);
+	this.mysteryTourDescBg.get_graphics().drawRect(0,0,600,200);
 	this.mysteryTourDescBg.get_graphics().endFill();
 	this.addChild(this.mysteryTourDescBg);
-	this.mysteryTourDescBg.set_x(152.5);
-	this.mysteryTourDescBg.set_y(150);
+	this.mysteryTourDescBg.set_x((openfl_Lib.get_current().stage.stageWidth - 600) / 2);
+	this.mysteryTourDescBg.set_y(110);
 	this.mysteryTourDesc = new openfl_text_TextField();
 	this.mysteryTourDesc.setTextFormat(client_utils_TextFormats.SIZE_24);
 	this.mysteryTourDesc.set_text(mysteryTour.desc);
@@ -4771,43 +4770,102 @@ var client_screens_MysteryTourDetail = function(mysteryTour) {
 	this.mysteryTourDesc.set_height(200);
 	this.mysteryTourDesc.set_autoSize(0);
 	this.mysteryTourDescBg.addChild(this.mysteryTourDesc);
-	this.shennanagenButtonContainer = new openfl_display_Sprite();
-	this.addChild(this.shennanagenButtonContainer);
-	this.shennanagenButtonContainer.set_y(385);
-	this.shennanagens = [];
-	var _g = 0;
-	var _g1 = mysteryTour.shennanagens;
-	while(_g < _g1.length) {
-		var shennanagen = _g1[_g];
-		++_g;
-		haxe_Log.trace(shennanagen,{ fileName : "MysteryTourDetail.hx", lineNumber : 82, className : "client.screens.MysteryTourDetail", methodName : "new"});
-		var btn = new client_utils_TextButton(shennanagen.name,500,40);
-		btn.addEventListener("click",$bind(this,this.onClickShennanagen));
-		btn.cargo = shennanagen;
-		this.shennanagenButtonContainer.addChild(btn);
-		btn.set_x(20);
-		btn.set_y(this.shennanagens.length * 55);
-		this.shennanagens.push(btn);
+	this.mysteryTour = mysteryTour;
+	if(!(mysteryTour.shennanagens == null || mysteryTour.shennanagens.length == 0)) {
+		if(mysteryTour.shennanagens.length == 1) {
+			this.layoutShennanagen();
+		} else {
+			this.layoutShennanagens();
+		}
 	}
-	this.addEventListener("mouseWheel",$bind(this,this.onScrollMouseWheel));
 };
 $hxClasses["client.screens.MysteryTourDetail"] = client_screens_MysteryTourDetail;
 client_screens_MysteryTourDetail.__name__ = ["client","screens","MysteryTourDetail"];
 client_screens_MysteryTourDetail.__super__ = openfl_display_Sprite;
 client_screens_MysteryTourDetail.prototype = $extend(openfl_display_Sprite.prototype,{
 	screenBg: null
+	,mysteryTour: null
 	,mysteryTourNameBg: null
 	,mysteryTourName: null
 	,mysteryTourDescBg: null
 	,mysteryTourDesc: null
 	,shennanagenButtonContainer: null
+	,shennanyNameBg: null
+	,shennanyName: null
+	,shennanyDescBg: null
+	,shennanyDesc: null
 	,shennanagens: null
 	,maxButtonYPos: null
 	,shennanagenDetailScreen: null
+	,layoutShennanagen: function() {
+		var shennany = this.mysteryTour.shennanagens[0];
+		this.shennanyNameBg = new openfl_display_Sprite();
+		this.shennanyNameBg.get_graphics().beginFill(0);
+		this.shennanyNameBg.get_graphics().drawRect(0,0,700,80);
+		this.shennanyNameBg.get_graphics().endFill();
+		this.addChild(this.shennanyNameBg);
+		this.shennanyNameBg.set_x((openfl_Lib.get_current().stage.stageWidth - 700) / 2);
+		this.shennanyNameBg.set_y(315);
+		this.shennanyName = new openfl_text_TextField();
+		this.shennanyName.setTextFormat(client_utils_TextFormats.SIZE_32);
+		this.shennanyName.set_text(shennany.name);
+		this.shennanyName.set_width(700);
+		this.shennanyName.set_height(80);
+		this.shennanyName.set_autoSize(0);
+		this.shennanyNameBg.addChild(this.shennanyName);
+		this.shennanyDescBg = new openfl_display_Sprite();
+		this.shennanyDescBg.get_graphics().beginFill(0);
+		this.shennanyDescBg.get_graphics().drawRect(0,0,700,200);
+		this.shennanyDescBg.get_graphics().endFill();
+		this.addChild(this.shennanyDescBg);
+		this.shennanyDescBg.set_x((openfl_Lib.get_current().stage.stageWidth - 700) / 2);
+		this.shennanyDescBg.set_y(415);
+		this.shennanyDesc = new openfl_text_TextField();
+		this.shennanyDesc.setTextFormat(client_utils_TextFormats.SIZE_24);
+		this.shennanyDesc.set_text(shennany.desc);
+		this.shennanyDesc.set_width(700);
+		this.shennanyDesc.set_height(200);
+		this.shennanyDesc.set_autoSize(0);
+		this.shennanyDescBg.addChild(this.shennanyDesc);
+		this.shennanyNameBg.addEventListener("click",$bind(this,this.onClickShennanagen));
+		this.shennanyDescBg.addEventListener("click",$bind(this,this.onClickShennanagen));
+	}
+	,layoutShennanagens: function() {
+		this.shennanagenButtonContainer = new openfl_display_Sprite();
+		this.addChild(this.shennanagenButtonContainer);
+		this.shennanagenButtonContainer.set_y(385);
+		this.shennanagens = [];
+		var _g = 0;
+		var _g1 = this.mysteryTour.shennanagens;
+		while(_g < _g1.length) {
+			var shenanny = _g1[_g];
+			++_g;
+			var btn = new client_utils_TextButton(shenanny.name,500,40);
+			btn.addEventListener("click",$bind(this,this.onClickShennanagen));
+			btn.cargo = shenanny;
+			this.shennanagenButtonContainer.addChild(btn);
+			btn.set_x(20);
+			btn.set_y(this.shennanagens.length * 55);
+			this.shennanagens.push(btn);
+			var pointsText = shenanny.get_pointsEarned() + " pts. / " + shenanny.get_pointsPossible() + " pts." + (shenanny.get_canBeCompletedMoreThanOnce() ? " each" : "");
+			var pointsBtn = new client_utils_TextButton(pointsText,250,40);
+			pointsBtn.addEventListener("click",$bind(this,this.onClickShennanagen));
+			pointsBtn.cargo = shenanny;
+			pointsBtn.set_x(openfl_Lib.get_current().stage.stageWidth - 265);
+			pointsBtn.set_y(btn.get_y());
+			this.shennanagenButtonContainer.addChild(pointsBtn);
+		}
+		this.addEventListener("mouseWheel",$bind(this,this.onScrollMouseWheel));
+	}
 	,onClickShennanagen: function(e) {
-		var btn = js_Boot.__cast(e.currentTarget , client_utils_TextButton);
-		this.shennanagenDetailScreen = new client_screens_ShennanagenDetail(js_Boot.__cast(btn.cargo , objects_Shennanagen));
-		this.addChild(this.shennanagenDetailScreen);
+		if(this.mysteryTour.shennanagens.length == 1) {
+			this.shennanagenDetailScreen = new client_screens_ShennanagenDetail(this.mysteryTour.shennanagens[0]);
+			this.addChild(this.shennanagenDetailScreen);
+		} else if(this.mysteryTour.shennanagens.length > 1) {
+			var btn = js_Boot.__cast(e.currentTarget , client_utils_TextButton);
+			this.shennanagenDetailScreen = new client_screens_ShennanagenDetail(js_Boot.__cast(btn.cargo , objects_Shennanagen));
+			this.addChild(this.shennanagenDetailScreen);
+		}
 	}
 	,onScrollMouseWheel: function(e) {
 		if(this.maxButtonYPos + this.shennanagenButtonContainer.get_height() + 20 > openfl_Lib.get_current().stage.stageHeight) {
@@ -31602,7 +31660,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 413211;
+	this.version = 832790;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
@@ -33969,51 +34027,19 @@ lime_utils_compress_Zlib.decompress = function(bytes) {
 	var data = pako.inflate(bytes.b.bufferValue);
 	return haxe_io_Bytes.ofData(data);
 };
-var objects_Activity = function(jsonObj) {
-	this.name = jsonObj.ActivityName;
-	this.desc = jsonObj.ActivityDescription;
-	this.pointsPerCompletion = jsonObj.PointsPerCompletion;
-	this.timesActivityCanBeCompleted = jsonObj.TimesActivityCanBeCompleted;
-	this.numTimesActivityCompleted = 0;
-};
-$hxClasses["objects.Activity"] = objects_Activity;
-objects_Activity.__name__ = ["objects","Activity"];
-objects_Activity.prototype = {
-	name: null
-	,desc: null
-	,pointsPerCompletion: null
-	,timesActivityCanBeCompleted: null
-	,numTimesActivityCompleted: null
-	,submitActivityForCompletion: function() {
-	}
-	,activityCompleted: function() {
-		if(this.canBeCompletedMoreThanOnce() && this.numTimesActivityCompleted >= this.timesActivityCanBeCompleted) {
-			return;
-		}
-		++this.numTimesActivityCompleted;
-	}
-	,pointsEarned: function() {
-		return this.numTimesActivityCompleted * this.pointsPerCompletion;
-	}
-	,canBeCompletedMoreThanOnce: function() {
-		return this.timesActivityCanBeCompleted != 0;
-	}
-	,__class__: objects_Activity
-};
 var objects_MysteryTour = function(jsonStr) {
-	haxe_Log.trace(jsonStr,{ fileName : "MysteryTour.hx", lineNumber : 17, className : "objects.MysteryTour", methodName : "new"});
+	haxe_Log.trace("Parsing MysteryTour json:\n" + jsonStr,{ fileName : "MysteryTour.hx", lineNumber : 16, className : "objects.MysteryTour", methodName : "new"});
 	var jsonObj = JSON.parse(jsonStr);
-	haxe_Log.trace(jsonObj,{ fileName : "MysteryTour.hx", lineNumber : 19, className : "objects.MysteryTour", methodName : "new"});
 	this.name = jsonObj.MysteryTourName;
 	this.desc = jsonObj.MysteryTourDescription;
 	this.shennanagens = [];
 	var _g = 0;
 	var _g1 = Reflect.fields(jsonObj.Shennanagens);
 	while(_g < _g1.length) {
-		var shennanagen = _g1[_g];
+		var shennany = _g1[_g];
 		++_g;
-		haxe_Log.trace(Reflect.field(jsonObj.Shennanagens,shennanagen),{ fileName : "MysteryTour.hx", lineNumber : 26, className : "objects.MysteryTour", methodName : "new"});
-		this.shennanagens.push(new objects_Shennanagen(Reflect.field(jsonObj.Shennanagens,shennanagen)));
+		haxe_Log.trace(Reflect.field(jsonObj.Shennanagens,shennany),{ fileName : "MysteryTour.hx", lineNumber : 23, className : "objects.MysteryTour", methodName : "new"});
+		this.shennanagens.push(new objects_Shennanagen(Reflect.field(jsonObj.Shennanagens,shennany)));
 	}
 };
 $hxClasses["objects.MysteryTour"] = objects_MysteryTour;
@@ -34025,16 +34051,18 @@ objects_MysteryTour.prototype = {
 	,__class__: objects_MysteryTour
 };
 var objects_Shennanagen = function(jsonObj) {
-	haxe_Log.trace(jsonObj,{ fileName : "Shennanagen.hx", lineNumber : 32, className : "objects.Shennanagen", methodName : "new"});
 	this.name = jsonObj.ShennanagenName;
 	this.desc = jsonObj.ShennanagenDescription;
-	this.activities = [];
+	this.timesToBeCompleted = jsonObj.TimesToBeCompleted;
+	this.pointsPerCompletion = jsonObj.PointsPerCompletion;
+	this.timesCompleted = 0;
+	this.shennanagens = [];
 	var _g = 0;
-	var _g1 = Reflect.fields(jsonObj.Activities);
+	var _g1 = Reflect.fields(jsonObj.Shennanagens);
 	while(_g < _g1.length) {
-		var activity = _g1[_g];
+		var shennany = _g1[_g];
 		++_g;
-		this.activities.push(new objects_Activity(Reflect.field(jsonObj.Activities,activity)));
+		this.shennanagens.push(new objects_Shennanagen(Reflect.field(jsonObj.Shennanagens,shennany)));
 	}
 };
 $hxClasses["objects.Shennanagen"] = objects_Shennanagen;
@@ -34042,32 +34070,55 @@ objects_Shennanagen.__name__ = ["objects","Shennanagen"];
 objects_Shennanagen.prototype = {
 	name: null
 	,desc: null
-	,activities: null
+	,pointsPerCompletion: null
+	,timesToBeCompleted: null
+	,timesCompleted: null
+	,shennanagens: null
 	,get_canBeCompletedMoreThanOnce: function() {
-		var flag = true;
+		var flag = this.timesToBeCompleted != 0;
 		var _g = 0;
-		var _g1 = this.activities;
+		var _g1 = this.shennanagens;
 		while(_g < _g1.length) {
-			var activity = _g1[_g];
+			var shennany = _g1[_g];
 			++_g;
 			if(!flag) {
-				flag = activity.canBeCompletedMoreThanOnce();
+				flag = shennany.get_canBeCompletedMoreThanOnce();
 			} else {
 				flag = true;
 			}
 		}
 		return flag;
 	}
-	,get_pointsEarned: function() {
-		var sum = 0;
+	,get_pointsPossible: function() {
+		var sum = this.timesCompleted == 0 ? this.pointsPerCompletion : this.timesToBeCompleted * this.pointsPerCompletion;
 		var _g = 0;
-		var _g1 = this.activities;
+		var _g1 = this.shennanagens;
 		while(_g < _g1.length) {
-			var activity = _g1[_g];
+			var shennany = _g1[_g];
 			++_g;
-			sum += activity.pointsEarned();
+			sum += shennany.get_pointsPossible();
 		}
 		return sum;
+	}
+	,get_pointsEarned: function() {
+		var sum = this.timesCompleted * this.pointsPerCompletion;
+		var _g = 0;
+		var _g1 = this.shennanagens;
+		while(_g < _g1.length) {
+			var shennany = _g1[_g];
+			++_g;
+			sum += shennany.get_pointsEarned();
+		}
+		return sum;
+	}
+	,completeShennanagen: function() {
+		this.shennanagenCompleted();
+	}
+	,shennanagenCompleted: function() {
+		if(this.get_canBeCompletedMoreThanOnce() && this.timesCompleted >= this.timesToBeCompleted) {
+			return;
+		}
+		++this.timesCompleted;
 	}
 	,__class__: objects_Shennanagen
 };
