@@ -1041,7 +1041,7 @@ $hxClasses["ApplicationMain"] = ApplicationMain;
 ApplicationMain.__name__ = ["ApplicationMain"];
 ApplicationMain.main = function() {
 	var projectName = "MysteryShennanagens";
-	var config = { build : "1", company : "Company Name", file : "MysteryShennanagens", fps : 60, name : "MysteryShennanagens", orientation : "", packageName : "com.mysterytours.MysteryShennanagens", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, colorDepth : 16, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : false, maximized : false, minimized : false, parameters : { }, resizable : true, stencilBuffer : true, title : "MysteryShennanagens", vsync : false, width : 0, x : null, y : null}]};
+	var config = { build : "2", company : "Company Name", file : "MysteryShennanagens", fps : 60, name : "MysteryShennanagens", orientation : "", packageName : "com.mysterytours.MysteryShennanagens", version : "1.0.0", windows : [{ allowHighDPI : false, alwaysOnTop : false, antialiasing : 0, background : 16777215, borderless : false, colorDepth : 16, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 0, hidden : false, maximized : false, minimized : false, parameters : { }, resizable : true, stencilBuffer : true, title : "MysteryShennanagens", vsync : false, width : 0, x : null, y : null}]};
 	lime_system_System.__registerEntryPoint(projectName,ApplicationMain.create,config);
 };
 ApplicationMain.create = function(config) {
@@ -1473,6 +1473,7 @@ lime_utils_ObjectPool.prototype = {
 		if(!this.__pool.exists(object)) {
 			this.__pool.set(object,false);
 			this.clean(object);
+			this.__pool.set(object,false);
 			if(this.__inactiveObject0 == null) {
 				this.__inactiveObject0 = object;
 			} else if(this.__inactiveObject1 == null) {
@@ -1515,6 +1516,7 @@ lime_utils_ObjectPool.prototype = {
 					this.__inactiveObject1 = this.__inactiveObjectList.pop();
 				}
 			}
+			this.__pool.set(object1,true);
 			this.inactiveObjects--;
 			this.activeObjects++;
 			object = object1;
@@ -1528,9 +1530,15 @@ lime_utils_ObjectPool.prototype = {
 		return object;
 	}
 	,release: function(object) {
+		if(!this.__pool.exists(object)) {
+			lime_utils_Log.error("Object is not a member of the pool",{ fileName : "ObjectPool.hx", lineNumber : 130, className : "lime.utils.ObjectPool", methodName : "release"});
+		} else if(!this.__pool.get(object)) {
+			lime_utils_Log.error("Object has already been released",{ fileName : "ObjectPool.hx", lineNumber : 134, className : "lime.utils.ObjectPool", methodName : "release"});
+		}
 		this.activeObjects--;
 		if(this.__size == null || this.activeObjects + this.inactiveObjects < this.__size) {
 			this.clean(object);
+			this.__pool.set(object,false);
 			if(this.__inactiveObject0 == null) {
 				this.__inactiveObject0 = object;
 			} else if(this.__inactiveObject1 == null) {
@@ -1544,6 +1552,7 @@ lime_utils_ObjectPool.prototype = {
 		}
 	}
 	,__addInactive: function(object) {
+		this.__pool.set(object,false);
 		if(this.__inactiveObject0 == null) {
 			this.__inactiveObject0 = object;
 		} else if(this.__inactiveObject1 == null) {
@@ -1570,6 +1579,7 @@ lime_utils_ObjectPool.prototype = {
 				this.__inactiveObject1 = this.__inactiveObjectList.pop();
 			}
 		}
+		this.__pool.set(object,true);
 		this.inactiveObjects--;
 		this.activeObjects++;
 		return object;
@@ -4106,7 +4116,7 @@ ManifestResources.init = function(config) {
 	var data;
 	var manifest;
 	var library;
-	data = "{\"name\":null,\"assets\":\"aoy4:pathy44:assets%2Fimages%2FBuy%20Lame%20Souvenirs.pngy4:sizei68641y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y27:assets%2Ffont%2FVT323.woff2R2i7020R3y6:BINARYR5R7R6tgoR2i153116R3y4:FONTy9:classNamey38:__ASSET__assets_font_vt323_regular_ttfR5y33:assets%2Ffont%2FVT323-Regular.ttfR6tgoR0y45:assets%2Fdata%2FTheSimpleTestMysteryTour.jsonR2i413R3y4:TEXTR5R13R6tgh\",\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	data = "{\"name\":null,\"assets\":\"aoy4:pathy44:assets%2Fimages%2FBuy%20Lame%20Souvenirs.pngy4:sizei68641y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y27:assets%2Ffont%2FVT323.woff2R2i7020R3y6:BINARYR5R7R6tgoR2i153116R3y4:FONTy9:classNamey38:__ASSET__assets_font_vt323_regular_ttfR5y33:assets%2Ffont%2FVT323-Regular.ttfR6tgoR0y45:assets%2Fdata%2FTheSimpleTestMysteryTour.jsonR2i530R3y4:TEXTR5R13R6tgh\",\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -4847,7 +4857,7 @@ client_screens_MysteryTourDetail.prototype = $extend(openfl_display_Sprite.proto
 			btn.set_x(20);
 			btn.set_y(this.shennanagens.length * 55);
 			this.shennanagens.push(btn);
-			var pointsText = shenanny.get_pointsEarned() + " pts. / " + shenanny.get_pointsPossible() + " pts." + (shenanny.get_canBeCompletedMoreThanOnce() ? " each" : "");
+			var pointsText = "000 pts. / " + shenanny.get_pointsPossible() + " pts." + (shenanny.canBeCompletedInfiniteTimes() ? " each" : "");
 			var pointsBtn = new client_utils_TextButton(pointsText,250,40);
 			pointsBtn.addEventListener("click",$bind(this,this.onClickShennanagen));
 			pointsBtn.cargo = shenanny;
@@ -31660,7 +31670,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 832790;
+	this.version = 942984;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
@@ -34028,26 +34038,56 @@ lime_utils_compress_Zlib.decompress = function(bytes) {
 	return haxe_io_Bytes.ofData(data);
 };
 var objects_MysteryTour = function(jsonStr) {
-	haxe_Log.trace("Parsing MysteryTour json:\n" + jsonStr,{ fileName : "MysteryTour.hx", lineNumber : 16, className : "objects.MysteryTour", methodName : "new"});
+	haxe_Log.trace("Parsing MysteryTour json:\n" + jsonStr,{ fileName : "MysteryTour.hx", lineNumber : 31, className : "objects.MysteryTour", methodName : "new"});
 	var jsonObj = JSON.parse(jsonStr);
 	this.name = jsonObj.MysteryTourName;
 	this.desc = jsonObj.MysteryTourDescription;
+	this.teams = [];
 	this.shennanagens = [];
 	var _g = 0;
 	var _g1 = Reflect.fields(jsonObj.Shennanagens);
 	while(_g < _g1.length) {
 		var shennany = _g1[_g];
 		++_g;
-		haxe_Log.trace(Reflect.field(jsonObj.Shennanagens,shennany),{ fileName : "MysteryTour.hx", lineNumber : 23, className : "objects.MysteryTour", methodName : "new"});
+		haxe_Log.trace(Reflect.field(jsonObj.Shennanagens,shennany),{ fileName : "MysteryTour.hx", lineNumber : 42, className : "objects.MysteryTour", methodName : "new"});
 		this.shennanagens.push(new objects_Shennanagen(Reflect.field(jsonObj.Shennanagens,shennany)));
 	}
 };
 $hxClasses["objects.MysteryTour"] = objects_MysteryTour;
 objects_MysteryTour.__name__ = ["objects","MysteryTour"];
+objects_MysteryTour.serialize = function(tour) {
+};
+objects_MysteryTour.deserialize = function(filename) {
+};
 objects_MysteryTour.prototype = {
 	name: null
 	,desc: null
+	,date: null
 	,shennanagens: null
+	,teams: null
+	,addTeam: function(t) {
+		if(this.teams.indexOf(t) != -1) {
+			return;
+		}
+		this.teams.push(t);
+	}
+	,getTeamScore: function(t) {
+		var score = 0;
+		var _g = 0;
+		var _g1 = this.shennanagens;
+		while(_g < _g1.length) {
+			var shennany = _g1[_g];
+			++_g;
+			var _g2 = 0;
+			var _g3 = t.teamMembers;
+			while(_g2 < _g3.length) {
+				var member = _g3[_g2];
+				++_g2;
+				score += shennany.getScore(member);
+			}
+		}
+		return score;
+	}
 	,__class__: objects_MysteryTour
 };
 var objects_Shennanagen = function(jsonObj) {
@@ -34055,7 +34095,9 @@ var objects_Shennanagen = function(jsonObj) {
 	this.desc = jsonObj.ShennanagenDescription;
 	this.timesToBeCompleted = jsonObj.TimesToBeCompleted;
 	this.pointsPerCompletion = jsonObj.PointsPerCompletion;
-	this.timesCompleted = 0;
+	this.completedBy = [];
+	this.canBeCompletedByEachTeamMember = jsonObj.CanBeCompletedByEachTeamMember == "true";
+	this.canBeCompletedByEachTeam = jsonObj.CanBeCompletedByEachTeam == "true";
 	this.shennanagens = [];
 	var _g = 0;
 	var _g1 = Reflect.fields(jsonObj.Shennanagens);
@@ -34072,17 +34114,18 @@ objects_Shennanagen.prototype = {
 	,desc: null
 	,pointsPerCompletion: null
 	,timesToBeCompleted: null
-	,timesCompleted: null
+	,canBeCompletedByEachTeamMember: null
+	,canBeCompletedByEachTeam: null
 	,shennanagens: null
-	,get_canBeCompletedMoreThanOnce: function() {
-		var flag = this.timesToBeCompleted != 0;
+	,canBeCompletedInfiniteTimes: function() {
+		var flag = this.timesToBeCompleted == -1;
 		var _g = 0;
 		var _g1 = this.shennanagens;
 		while(_g < _g1.length) {
 			var shennany = _g1[_g];
 			++_g;
 			if(!flag) {
-				flag = shennany.get_canBeCompletedMoreThanOnce();
+				flag = shennany.canBeCompletedInfiniteTimes();
 			} else {
 				flag = true;
 			}
@@ -34090,7 +34133,7 @@ objects_Shennanagen.prototype = {
 		return flag;
 	}
 	,get_pointsPossible: function() {
-		var sum = this.timesCompleted == 0 ? this.pointsPerCompletion : this.timesToBeCompleted * this.pointsPerCompletion;
+		var sum = this.timesToBeCompleted == -1 ? this.pointsPerCompletion : this.timesToBeCompleted * this.pointsPerCompletion;
 		var _g = 0;
 		var _g1 = this.shennanagens;
 		while(_g < _g1.length) {
@@ -34100,27 +34143,110 @@ objects_Shennanagen.prototype = {
 		}
 		return sum;
 	}
-	,get_pointsEarned: function() {
-		var sum = this.timesCompleted * this.pointsPerCompletion;
+	,getScore: function(tm) {
+		var score = 0;
 		var _g = 0;
-		var _g1 = this.shennanagens;
+		var _g1 = this.completedBy;
 		while(_g < _g1.length) {
-			var shennany = _g1[_g];
+			var member = _g1[_g];
 			++_g;
-			sum += shennany.get_pointsEarned();
+			if(member == tm) {
+				score += this.pointsPerCompletion;
+			}
 		}
-		return sum;
+		return score;
 	}
-	,completeShennanagen: function() {
-		this.shennanagenCompleted();
-	}
-	,shennanagenCompleted: function() {
-		if(this.get_canBeCompletedMoreThanOnce() && this.timesCompleted >= this.timesToBeCompleted) {
-			return;
+	,getTeamScore: function(t) {
+		var score = 0;
+		var _g = 0;
+		var _g1 = this.completedBy;
+		while(_g < _g1.length) {
+			var member = _g1[_g];
+			++_g;
+			if(member.team == t) {
+				score += this.pointsPerCompletion;
+			}
 		}
-		++this.timesCompleted;
+		return score;
+	}
+	,completedBy: null
+	,canCompleteShennangen: function(tm) {
+		if(this.canBeCompletedByEachTeamMember) {
+			var timesCompletedByMember = 0;
+			var _g = 0;
+			var _g1 = this.completedBy;
+			while(_g < _g1.length) {
+				var member = _g1[_g];
+				++_g;
+				if(member == tm) {
+					++timesCompletedByMember;
+				}
+			}
+			return timesCompletedByMember < this.timesToBeCompleted;
+		}
+		if(this.canBeCompletedByEachTeam) {
+			var timesCompletedByTeam = 0;
+			var _g2 = 0;
+			var _g11 = this.completedBy;
+			while(_g2 < _g11.length) {
+				var member1 = _g11[_g2];
+				++_g2;
+				if(member1.team == tm.team) {
+					++timesCompletedByTeam;
+				}
+			}
+			return timesCompletedByTeam < this.timesToBeCompleted;
+		}
+		if(this.timesToBeCompleted != -1) {
+			return this.completedBy.length == 0;
+		} else {
+			return true;
+		}
+	}
+	,completeShennanagen: function(tm) {
+		this.canCompleteShennangen(tm);
+		this.shennanagenCompleted(tm);
+	}
+	,shennanagenCompleted: function(tm) {
+		this.completedBy.push(tm);
 	}
 	,__class__: objects_Shennanagen
+};
+var objects_Team = function(n) {
+	this.name = n;
+	this.teamMembers = [];
+};
+$hxClasses["objects.Team"] = objects_Team;
+objects_Team.__name__ = ["objects","Team"];
+objects_Team.prototype = {
+	name: null
+	,currentMysteryTour: null
+	,teamMembers: null
+	,addMember: function(tm) {
+		if(this.teamMembers.indexOf(tm) != -1) {
+			return;
+		}
+		this.teamMembers.push(tm);
+	}
+	,removeMember: function(tm) {
+		if(this.teamMembers.indexOf(tm) != -1) {
+			HxOverrides.remove(this.teamMembers,tm);
+		}
+	}
+	,__class__: objects_Team
+};
+var objects_TeamMember = function(mt,t,n) {
+	this.team = t;
+	this.name = n;
+	this.currentMysteryTour = mt;
+};
+$hxClasses["objects.TeamMember"] = objects_TeamMember;
+objects_TeamMember.__name__ = ["objects","TeamMember"];
+objects_TeamMember.prototype = {
+	name: null
+	,team: null
+	,currentMysteryTour: null
+	,__class__: objects_TeamMember
 };
 var openfl_Lib = function() { };
 $hxClasses["openfl.Lib"] = openfl_Lib;
@@ -73225,3 +73351,5 @@ openfl_utils__$Endian_Endian_$Impl_$.BIG_ENDIAN = 0;
 openfl_utils__$Endian_Endian_$Impl_$.LITTLE_ENDIAN = 1;
 ApplicationMain.main();
 })(typeof exports != "undefined" ? exports : typeof window != "undefined" ? window : typeof self != "undefined" ? self : this, typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
+
+//# sourceMappingURL=MysteryShennanagens.js.map

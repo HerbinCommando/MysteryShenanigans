@@ -147,7 +147,7 @@ class MysteryTourDetail extends Sprite {
             btn.y = shennanagens.length * 55;
             shennanagens.push(btn);
 
-            var pointsText:String = shenanny.pointsEarned + " pts. / " + shenanny.pointsPossible + " pts." + (shenanny.canBeCompletedMoreThanOnce ? " each" : "");
+            var pointsText:String = /*shenanny.pointsEarned TODO: get points for the current team member +*/ "000 pts. / " + shenanny.pointsPossible + " pts." + (shenanny.canBeCompletedInfiniteTimes() ? " each" : "");
             var pointsBtn:TextButton = new TextButton(pointsText, 250, 40);
             pointsBtn.addEventListener(MouseEvent.CLICK, onClickShennanagen);
             pointsBtn.cargo = shenanny;

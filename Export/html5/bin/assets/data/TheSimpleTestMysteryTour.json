@@ -1,10 +1,13 @@
 {
   "MysteryTourName": "The Simple Test Mystery Tour",
   "MysteryTourDescription": "A simple mystery tour, showcasing a simple shennanagan, for the simple man.",
+  "Date":"01/01/19/00:00",
   "Shennanagens": [
     {
       "ShennanagenName": "Do Nothing",
       "ShennanagenDescription": "A simple shennanagen with one thing to do, nothing",
+      "CanBeCompletedByEachTeamMember": "true",
+      "CanBeCompletedByEachTeam": "true",
       "TimesToBeCompleted": 1,
       "PointsPerCompletion": 50,
       "Shennanagens": []
