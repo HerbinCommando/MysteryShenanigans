@@ -4,8 +4,8 @@
   "Date":"01/01/19/00:00",
   "Shennanagens": [
     {
-      "ShennanagenName": "Do Nothing",
-      "ShennanagenDescription": "A simple shennanagen with one thing to do, nothing",
+      "ShenaniganName": "Do Nothing",
+      "ShenaniganDescription": "A simple shennanagen with one thing to do, nothing",
       "CanBeCompletedByEachTeamMember": "true",
       "CanBeCompletedByEachTeam": "true",
       "TimesToBeCompleted": 1,

@@ -2,7 +2,7 @@ package objects;
 
 import haxe.Json;
 import objects.MysteryTour;
-import objects.Shennanagen;
+import objects.Shenanigan;
 import objects.Team;
 
 // A TeamMember is an individual.

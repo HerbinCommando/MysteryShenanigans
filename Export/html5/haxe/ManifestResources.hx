@@ -54,7 +54,7 @@ import sys.FileSystem;
 		
 		var data, manifest, library;
 		
-		data = '{"name":null,"assets":"aoy4:pathy44:assets%2Fimages%2FBuy%20Lame%20Souvenirs.pngy4:sizei68641y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y27:assets%2Ffont%2FVT323.woff2R2i7020R3y6:BINARYR5R7R6tgoR2i153116R3y4:FONTy9:classNamey38:__ASSET__assets_font_vt323_regular_ttfR5y33:assets%2Ffont%2FVT323-Regular.ttfR6tgoR0y45:assets%2Fdata%2FTheSimpleTestMysteryTour.jsonR2i530R3y4:TEXTR5R13R6tgh","version":2,"libraryArgs":[],"libraryType":null}';
+		data = '{"name":null,"assets":"aoy4:pathy44:assets%2Fimages%2FBuy%20Lame%20Souvenirs.pngy4:sizei68641y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y27:assets%2Ffont%2FVT323.woff2R2i7020R3y6:BINARYR5R7R6tgoR2i153116R3y4:FONTy9:classNamey38:__ASSET__assets_font_vt323_regular_ttfR5y33:assets%2Ffont%2FVT323-Regular.ttfR6tgoR0y45:assets%2Fdata%2FTheSimpleTestMysteryTour.jsonR2i528R3y4:TEXTR5R13R6tgh","version":2,"libraryArgs":[],"libraryType":null}';
 		manifest = AssetManifest.parse (data, rootPath);
 		library = AssetLibrary.fromManifest (manifest);
 		Assets.registerLibrary ("default", library);

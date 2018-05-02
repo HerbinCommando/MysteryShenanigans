@@ -4,7 +4,7 @@ import haxe.Json;
 import objects.Team;
 import objects.TeamMember;
 
-class Shennanagen {
+class Shenanigan {
 
     // static data
     public var name(default, null):String;
@@ -13,14 +13,14 @@ class Shennanagen {
     public var timesToBeCompleted(default, null):Int; // -1 for infinite times
     public var canBeCompletedByEachTeamMember(default, null):Bool;
     public var canBeCompletedByEachTeam(default, null):Bool; // False implies competitive, only one team can complete
-    public var shennanagens:Array<Shennanagen>;
+    public var shenanigans:Array<Shenanigan>;
 
     /*
     public var canBeCompletedMoreThanOnce(get, never):Bool;
     public function get_canBeCompletedMoreThanOnce():Bool {
         var flag:Bool = timesToBeCompleted != 0;
-        for (shennany in shennanagens) {
-            flag = (flag || shennany.canBeCompletedMoreThanOnce);
+        for (shenani in shenanigans) {
+            flag = (flag || shenani.canBeCompletedMoreThanOnce);
         }
         return flag;
     }
@@ -28,8 +28,8 @@ class Shennanagen {
 
     public function canBeCompletedInfiniteTimes():Bool {
         var flag:Bool = timesToBeCompleted == -1;
-        for (shennany in shennanagens) {
-            flag = (flag || shennany.canBeCompletedInfiniteTimes());
+        for (shenani in shenanigans) {
+            flag = (flag || shenani.canBeCompletedInfiniteTimes());
         }
         return flag;
     }
@@ -37,8 +37,8 @@ class Shennanagen {
     public var pointsPossible(get, never):Int;
     public function get_pointsPossible():Int {
         var sum:Int = timesToBeCompleted == -1 ? pointsPerCompletion : timesToBeCompleted * pointsPerCompletion;
-        for (shennany in shennanagens) {
-            sum += shennany.pointsPossible;
+        for (shenani in shenanigans) {
+            sum += shenani.pointsPossible;
         }
         return sum;
     }
@@ -71,8 +71,8 @@ class Shennanagen {
     public var pointsEarned(get, never):Int;
     public function get_pointsEarned():Int {
         var sum:Int = timesCompleted * pointsPerCompletion;
-        for (shennany in shennanagens) {
-            sum += shennany.pointsEarned;
+        for (shenani in shenanigans) {
+            sum += shenani.pointsEarned;
         }
         return sum;
     }
@@ -80,8 +80,8 @@ class Shennanagen {
 
     public function new (jsonObj:Dynamic) {
 
-        name = jsonObj.ShennanagenName;
-        desc = jsonObj.ShennanagenDescription;
+        name = jsonObj.ShenaniganName;
+        desc = jsonObj.ShenaniganDescription;
         timesToBeCompleted = jsonObj.TimesToBeCompleted;
         pointsPerCompletion = jsonObj.PointsPerCompletion;
 
@@ -91,9 +91,9 @@ class Shennanagen {
         canBeCompletedByEachTeamMember = jsonObj.CanBeCompletedByEachTeamMember == "true" ? true : false;
         canBeCompletedByEachTeam = jsonObj.CanBeCompletedByEachTeam == "true" ? true : false;
 
-        shennanagens = new Array<Shennanagen>();
-        for (shennany in Reflect.fields(jsonObj.Shennanagens)) {
-            shennanagens.push( new Shennanagen(Reflect.field(jsonObj.Shennanagens, shennany)) );
+        shenanigans = new Array<Shenanigan>();
+        for (shenani in Reflect.fields(jsonObj.Shenanigans)) {
+            shenanigans.push( new Shenanigan(Reflect.field(jsonObj.Shenanigans, shenani)) );
         }
 
     }

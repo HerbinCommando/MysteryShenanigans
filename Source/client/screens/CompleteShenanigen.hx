@@ -15,15 +15,15 @@ import openfl.text.TextFieldType;
 import client.utils.TextButton;
 import client.utils.TextFormats;
 
-import objects.Shennanagen;
+import objects.Shenanigan;
 
-class CompleteShennanagen extends Sprite {
+class CompleteShenanigen extends Sprite {
 
     public var screenBg:Bitmap;
     public var screenTitleBg:Sprite;
     public var screenTitle:TextField;
 
-    public function new (shennannagen:Shennanagen) {
+    public function new (shenani:Shenanigan) {
 
         super();
 
@@ -40,7 +40,7 @@ class CompleteShennanagen extends Sprite {
 
         screenTitle = new TextField();
         screenTitle.setTextFormat(TextFormats.SIZE_46);
-        screenTitle.text = "Submit *something* to complete the Shennanagen";
+        screenTitle.text = "Submit *something* to complete the Shenanigan";
         screenTitle.width = 600;
         screenTitle.height = 80;
         screenTitle.autoSize = TextFieldAutoSize.CENTER;

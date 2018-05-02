@@ -16,6 +16,6 @@
 -D html5
 -D web
 --remap flash:openfl
--js Export/html5/bin/MysteryShennanagens.js
+-js Export/html5/bin/MysteryShenanigans.js
 -cp Export/html5/haxe
 -D html5

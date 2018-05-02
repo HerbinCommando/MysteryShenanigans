@@ -2,7 +2,7 @@ package objects;
 
 import haxe.Json;
 import objects.MysteryTour;
-import objects.Shennanagen;
+import objects.Shenanigan;
 import objects.TeamMember;
 
 // A Team is a list of people who are doing, or have done a MysteryTour.

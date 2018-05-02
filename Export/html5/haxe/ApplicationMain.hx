@@ -20,17 +20,17 @@ import haxe.macro.Expr;
 	
 	public static function main () {
 		
-		var projectName = "MysteryShennanagens";
+		var projectName = "MysteryShenanigans";
 		
 		var config = {
 			
-			build: "2",
-			company: "Company Name",
-			file: "MysteryShennanagens",
+			build: "3",
+			company: "Tyler's Mystery Tours",
+			file: "MysteryShenanigans",
 			fps: 60,
-			name: "MysteryShennanagens",
+			name: "MysteryShenanigans",
 			orientation: "",
-			packageName: "com.mysterytours.MysteryShennanagens",
+			packageName: "com.mysterytours.MysteryShenanigans",
 			version: "1.0.0",
 			windows: [
 				
@@ -52,7 +52,7 @@ import haxe.macro.Expr;
 					parameters: {},
 					resizable: true,
 					stencilBuffer: true,
-					title: "MysteryShennanagens",
+					title: "MysteryShenanigans",
 					vsync: false,
 					width: 0,
 					x: null,

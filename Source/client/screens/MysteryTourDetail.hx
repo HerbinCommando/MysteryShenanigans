@@ -17,7 +17,7 @@ import client.utils.TextButton;
 import client.utils.TextFormats;
 
 import objects.MysteryTour;
-import objects.Shennanagen;
+import objects.Shenanigan;
 
 
 class MysteryTourDetail extends Sprite {
@@ -33,7 +33,7 @@ class MysteryTourDetail extends Sprite {
     public var shennanyName:TextField;
     public var shennanyDescBg:Sprite;
     public var shennanyDesc:TextField;
-    public var shennanagens:Array<TextButton>;
+    public var shenanigans:Array<TextButton>;
     public var maxButtonYPos:Int = 185;
     public var shennanagenDetailScreen:ShennanagenDetail;
     
@@ -77,10 +77,10 @@ class MysteryTourDetail extends Sprite {
         mysteryTourDescBg.addChild(mysteryTourDesc);
 
         this.mysteryTour = mysteryTour;
-        if (mysteryTour.shennanagens == null || mysteryTour.shennanagens.length == 0) {
+        if (mysteryTour.shenanigans == null || mysteryTour.shenanigans.length == 0) {
             //dont crash
         }
-        else if (mysteryTour.shennanagens.length == 1) {
+        else if (mysteryTour.shenanigans.length == 1) {
             layoutShennanagen();
         }
         else {
@@ -91,7 +91,7 @@ class MysteryTourDetail extends Sprite {
 
     private function layoutShennanagen():Void {
 
-        var shennany:Shennanagen = mysteryTour.shennanagens[0];
+        var shenani:Shenanigan = mysteryTour.shenanigans[0];
 
         shennanyNameBg = new Sprite();
         shennanyNameBg.graphics.beginFill(0x000000);
@@ -103,7 +103,7 @@ class MysteryTourDetail extends Sprite {
 
         shennanyName = new TextField();
         shennanyName.setTextFormat(TextFormats.SIZE_32);
-        shennanyName.text = shennany.name;
+        shennanyName.text = shenani.name;
         shennanyName.width = 700;
         shennanyName.height = 80;
         shennanyName.autoSize = TextFieldAutoSize.CENTER;
@@ -119,13 +119,13 @@ class MysteryTourDetail extends Sprite {
 
         shennanyDesc = new TextField();
         shennanyDesc.setTextFormat(TextFormats.SIZE_24);
-        shennanyDesc.text = shennany.desc;
+        shennanyDesc.text = shenani.desc;
         shennanyDesc.width = 700;
         shennanyDesc.height = 200;
         shennanyDesc.autoSize = TextFieldAutoSize.CENTER;
         shennanyDescBg.addChild(shennanyDesc);
 
-        // TODO: Add a complete shennany button
+        // TODO: Add a complete shenani button
         shennanyNameBg.addEventListener(MouseEvent.CLICK, onClickShennanagen);
         shennanyDescBg.addEventListener(MouseEvent.CLICK, onClickShennanagen);
     }
@@ -136,16 +136,16 @@ class MysteryTourDetail extends Sprite {
         addChild(shennanagenButtonContainer);
         shennanagenButtonContainer.y = 385;
 
-        shennanagens = new Array<TextButton>();
-        for (shenanny in mysteryTour.shennanagens) {
+        shenanigans = new Array<TextButton>();
+        for (shenanny in mysteryTour.shenanigans) {
 
             var btn:TextButton = new TextButton(shenanny.name, 500, 40);
             btn.addEventListener(MouseEvent.CLICK, onClickShennanagen);
             btn.cargo = shenanny;
             shennanagenButtonContainer.addChild(btn);
             btn.x = 20;
-            btn.y = shennanagens.length * 55;
-            shennanagens.push(btn);
+            btn.y = shenanigans.length * 55;
+            shenanigans.push(btn);
 
             var pointsText:String = /*shenanny.pointsEarned TODO: get points for the current team member +*/ "000 pts. / " + shenanny.pointsPossible + " pts." + (shenanny.canBeCompletedInfiniteTimes() ? " each" : "");
             var pointsBtn:TextButton = new TextButton(pointsText, 250, 40);
@@ -162,12 +162,12 @@ class MysteryTourDetail extends Sprite {
 
     public function onClickShennanagen(e:MouseEvent):Void {
 
-        if (mysteryTour.shennanagens.length == 1) {
-            shennanagenDetailScreen = new ShennanagenDetail(mysteryTour.shennanagens[0]);
+        if (mysteryTour.shenanigans.length == 1) {
+            shennanagenDetailScreen = new ShennanagenDetail(mysteryTour.shenanigans[0]);
             addChild(shennanagenDetailScreen);
-        } else if (mysteryTour.shennanagens.length > 1) {
+        } else if (mysteryTour.shenanigans.length > 1) {
             var btn:TextButton = cast(e.currentTarget, TextButton);
-            shennanagenDetailScreen = new ShennanagenDetail(cast(btn.cargo, Shennanagen));
+            shennanagenDetailScreen = new ShennanagenDetail(cast(btn.cargo, Shenanigan));
             addChild(shennanagenDetailScreen);
         }
 
@@ -175,7 +175,7 @@ class MysteryTourDetail extends Sprite {
 
     public function onScrollMouseWheel(e:MouseEvent):Void {
 
-        // If the shennanagens element is large enough to drop off the bottom of the screen, calculate the bottom extreme position
+        // If the shenanigans element is large enough to drop off the bottom of the screen, calculate the bottom extreme position
         if (maxButtonYPos + shennanagenButtonContainer.height + 20 > Lib.current.stage.stageHeight) {
             shennanagenButtonContainer.y += e.delta;
 

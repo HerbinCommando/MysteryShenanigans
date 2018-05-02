@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="MysteryShennanagens" package="com.mysterytours.MysteryShennanagens" version="1.0.0" company="Company Name" />
-	<app main="client.Main" path="Export" file="MysteryShennanagens" />
+	<meta title="MysteryShenanigans" package="com.mysterytours.MysteryShenanigans" version="1.0.0" company="Tyler's Mystery Tours" />
+	<app main="client.Main" path="Export" file="MysteryShenanigans" />
 	
 	<source path="Source" />
 	
